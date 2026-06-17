@@ -1,0 +1,11 @@
+name = "aetheris-mcp"
+main = "dist/index.js"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+REQUIRE_PAYMENT = "true"
+BASE_MICROPAYMENT_COST = "0.01"
+USDC_CONTRACT_ADDRESS = "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913"
+MERCHANT_WALLET_ADDRESS = "0x90F8bf6A479F320ced073E824F251354d117bf01"
+RPC_URL = "https://mainnet.base.org"

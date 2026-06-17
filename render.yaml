@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: aetheris-mcp
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: REQUIRE_PAYMENT
+        value: "true"
+      - key: BASE_MICROPAYMENT_COST
+        value: "0.01"
+      - key: USDC_CONTRACT_ADDRESS
+        value: "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913"
+      - key: MERCHANT_WALLET_ADDRESS
+        value: "0x90F8bf6A479F320ced073E824F251354d117bf01"
+      - key: RPC_URL
+        value: "https://mainnet.base.org"

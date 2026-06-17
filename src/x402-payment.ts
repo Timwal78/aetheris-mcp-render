@@ -54,7 +54,6 @@ export class X402PaymentProcessor {
       if (!receipt || receipt.status !== 1) return false;
 
       // Extract ERC-20 transfer event to verify recipient and payment amount
-      // Standard ERC-20 Transfer Signature Topic: Transfer(address,address,uint256)
       const transferTopic = "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef";
       let matchedPayment = false;
 
@@ -64,7 +63,7 @@ export class X402PaymentProcessor {
           
           if (toAddress === this.merchantAddress) {
             const transferAmount = BigInt(log.data);
-            const expectedWei = BigInt(Math.round(expectedCost * 1000000)); // USDC has 6 decimals
+            const expectedWei = BigInt(Math.round(expectedCost * 1000000));
 
             if (transferAmount >= expectedWei) {
               matchedPayment = true;

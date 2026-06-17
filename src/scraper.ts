@@ -7,7 +7,7 @@ export class ScraperService {
     try {
       const res = await fetch(url, {
         headers: {
-          'User-Agent': 'Aetheris-MCP-Agentic-Scraper/1.0.0 (Bot; +http://modelcontextprotocol.io)'
+          'User-Agent': 'Aetheris-MCP-Agentic-Scraper/1.0.0 (Bot; Node; +http://modelcontextprotocol.io)'
         }
       });
       
