@@ -1,41 +1,37 @@
-# Aetheris-MCP
+# 🛡️ Aetheris-MCP: The x402 Agentic Web Scraper
 
-A production-ready Model Context Protocol (MCP) server that provides AI agents with high-performance web-browsing, Javascript-rendering, and semantic JSON context extraction, natively gated by x402/Stripe MPP micro-payments settled in USDC on the Base Network.
+[![Render](https://img.shields.io/badge/Deploy_to-Render-blue?style=for-the-badge&logo=render)](https://render.com)
+[![Model Context Protocol](https://img.shields.io/badge/MCP-Standard-green?style=for-the-badge)](https://modelcontextprotocol.io)
+[![Base](https://img.shields.io/badge/Base-Network-0052FF?style=for-the-badge&logo=base)](https://base.org)
 
-## Features
-- **Web Scraping:** Dense Markdown context extraction stripped of ads and noise.
-- **BYOK LLM Attachment:** Pure MCP standard over Stdio (Bring Your Own Key for LLM execution).
-- **HTTP 402 Cryptographic Gateway:** Enforces Base USDC on-chain settlement before executing tool logic.
-- **Machine Loyalty Protocol:** Volume-based dynamic pricing for high-frequency agents.
-- **Viral Social Proof:** Generates execution receipts and shields/badges.
+**Aetheris-MCP** is an enterprise-grade Server-Sent Events (SSE) Model Context Protocol server. It provides AI Agents with high-fidelity, ad-free Markdown web scraping capabilities, protected by an on-chain **x402 Micropayment Interceptor**. 
 
-## Client Integration (Claude Desktop Example)
+Bring Your Own Key (BYOK) for inference. Settle in USDC on Base for context.
 
-To attach this server to an agent like Claude Desktop, append the following to your `claude_desktop_config.json`:
+## 🏗️ Architecture
+* **Engine:** Node.js + Express
+* **Scraper:** JSDOM (Deep DOM sanitization, strips scripts/styles/ads)
+* **Transport:** Server-Sent Events (`/sse` & `/message`)
+* **Monetization:** `ethers.js` (EVM HTTP 402 validation on Base Mainnet)
 
-```json
-{
-  "mcpServers": {
-    "aetheris-mcp": {
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "--env-file",
-        "/absolute/path/to/aetheris-mcp/.env",
-        "aetheris-mcp"
-      ]
-    }
-  }
-}
-```
+## 🚀 One-Click Deployment
+This repository is configured with a `render.yaml` Blueprint.
 
-## Running Locally
+1. Fork this repository.
+2. Go to your [Render Dashboard](https://dashboard.render.com).
+3. Click **New** -> **Blueprint**.
+4. Connect the forked repository. Render will automatically detect the configuration and deploy the Express server.
 
-1. `npm install`
-2. `npm run build`
-3. `npm start` (Operates over Stdio)
+## ⚙️ Environment Variables
+Ensure you set these in your hosting environment:
+* `REQUIRE_PAYMENT` (boolean) - Enforces the 402 interceptor.
+* `BASE_MICROPAYMENT_COST` (float) - USDC cost per scrape (e.g., `0.01`).
+* `USDC_CONTRACT_ADDRESS` - The target ERC-20 contract.
+* `MERCHANT_WALLET_ADDRESS` - Your EVM public key.
+* `RPC_URL` - Your Web3 RPC provider (defaults to `https://mainnet.base.org`).
 
-## x402 Payment Interceptor
-When an agent invokes `scrape_webpage` without a `paymentSignature`, the server responds with a JSON-RPC custom error `PAYMENT_REQUIRED` containing the challenge parameters (cost, token, recipient, nonce). The client agent must execute the on-chain transfer, capture the transaction hash, and re-invoke the tool with `_meta: { paymentSignature: "0x..." }`.
+## 💻 Client Integration
+Agents should NOT connect to this server manually. Use the official Auto-Settlement SDK:
+`npm install @aetheris/mcp-client`
+
+See the [Client SDK Repository](https://github.com/Timwal78/aetheris-client-sdk) for documentation on how the SDK intercepts the 402 challenge and settles the transaction autonomously.
