@@ -11,6 +11,8 @@ on:
   workflow_dispatch: {}
   push:
     tags: ["aetheris-mcp-v*"]
+    branches: ["master"]
+    paths: ["server.json"]
 
 jobs:
   publish:
