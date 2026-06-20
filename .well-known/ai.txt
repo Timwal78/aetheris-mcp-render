@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+Product: Aetheris-MCP — x402 Agentic Web Scraper
+Product-tagline: Enterprise-grade SSE MCP server with on-chain x402 micropayment interceptor
+Product-url: https://scriptmasterlabs.com
+Product-repo: https://github.com/timwal78/aetheris-mcp-render
+Product-category: MCP Server / x402 Web Scraping / AI Context Provider
+Product-license: MIT
+
+Product-summary: Aetheris-MCP is an enterprise-grade Server-Sent Events (SSE) Model Context Protocol server providing AI agents with high-fidelity, ad-free Markdown web scraping protected by an on-chain x402 micropayment interceptor. Agents connect via the Aetheris MCP Client SDK which auto-settles USDC payments on Base. Bring Your Own Key (BYOK) for inference. Render-ready with one-click deploy.
+
+Product-transport: SSE (Server-Sent Events) on /sse and /message endpoints
+Product-scraper: JSDOM — deep DOM sanitization, strips scripts/styles/ads, outputs clean Markdown
+Product-payment: HTTP 402 interceptor — USDC on Base Mainnet, validated via ethers.js EVM check
+Product-client-sdk: npm install aetheris-mcp-client (github.com/timwal78/aetheris-client-sdk)
+Product-config: REQUIRE_PAYMENT | BASE_MICROPAYMENT_COST | USDC_CONTRACT_ADDRESS | MERCHANT_WALLET_ADDRESS | RPC_URL
+Product-deployment: Render — render.yaml Blueprint included, one-click deploy
+
+Organization: ScriptMasterLabs / Script Master Labs LLC (SDVOSB)
+GitHub: https://github.com/timwal78/aetheris-mcp-render
