@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What is Aetheris-MCP?",
+    "answer": "Aetheris-MCP is an enterprise-grade Server-Sent Events (SSE) Model Context Protocol server. It provides AI agents with high-fidelity, ad-free Markdown web scraping, protected by an on-chain x402 micropayment interceptor. Agents pay USDC on Base per scrape. Content is fully sanitized by JSDOM (strips scripts, styles, ads) before delivery.",
+    "category": "product",
+    "url": "https://scriptmasterlabs.com"
+  },
+  {
+    "question": "How does the x402 payment work for scraping?",
+    "answer": "When an agent requests a URL and REQUIRE_PAYMENT=true, the server returns HTTP 402 with x402 payment terms. The agent uses the Aetheris MCP Client SDK to sign a USDC transfer on Base, then sends the transaction hash as proof. The server validates the transaction on-chain using ethers.js, then JSDOM scrapes the target URL and returns clean Markdown to the agent.",
+    "category": "payment",
+    "url": "https://github.com/timwal78/aetheris-mcp-render"
+  },
+  {
+    "question": "How do I deploy Aetheris-MCP?",
+    "answer": "One-click Render deploy: fork the repo, go to your Render Dashboard, click New → Blueprint, connect the forked repo. Render detects render.yaml and deploys automatically. Set env vars: REQUIRE_PAYMENT, BASE_MICROPAYMENT_COST (e.g. 0.01), USDC_CONTRACT_ADDRESS, MERCHANT_WALLET_ADDRESS, and optionally RPC_URL.",
+    "category": "deployment",
+    "url": "https://github.com/timwal78/aetheris-mcp-render"
+  },
+  {
+    "question": "How should AI agents connect to Aetheris-MCP?",
+    "answer": "Agents should use the official Aetheris MCP Client SDK (`npm install aetheris-mcp-client`) rather than connecting manually. The SDK automatically intercepts HTTP 402 challenges, signs USDC payments locally via ethers.js, and retries requests — handling the full payment flow transparently. See github.com/timwal78/aetheris-client-sdk.",
+    "category": "install",
+    "url": "https://www.npmjs.com/package/aetheris-mcp-client"
+  },
+  {
+    "question": "What does JSDOM scraping output?",
+    "answer": "JSDOM performs deep DOM sanitization on the target URL: it strips all scripts, stylesheets, ads, and layout noise, then extracts the meaningful content as clean Markdown. Agents receive high signal-to-noise context suitable for RAG, summarization, or research tasks.",
+    "category": "product",
+    "url": "https://github.com/timwal78/aetheris-mcp-render"
+  },
+  {
+    "question": "Who built Aetheris-MCP?",
+    "answer": "Aetheris-MCP was built by ScriptMasterLabs (Script Master Labs LLC), an SDVOSB. It is MIT licensed.",
+    "category": "company",
+    "url": "https://scriptmasterlabs.com"
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "product": "Aetheris-MCP",
+  "tagline": "Enterprise x402 Agentic Web Scraper — SSE MCP Server",
+  "description": "Aetheris-MCP is an enterprise-grade Server-Sent Events (SSE) Model Context Protocol server providing AI agents with high-fidelity, ad-free Markdown web scraping protected by an on-chain x402 micropayment interceptor. Agents pay USDC on Base per scrape. Content is stripped of scripts, styles, and ads by JSDOM before delivery. Bring Your Own Key for inference. Render-ready with one-click deploy.",
+  "url": "https://scriptmasterlabs.com",
+  "github": "https://github.com/timwal78/aetheris-mcp-render",
+  "license": "MIT",
+  "organization": "ScriptMasterLabs / Script Master Labs LLC (SDVOSB)",
+
+  "architecture": {
+    "engine": "Node.js + Express",
+    "scraper": "JSDOM — deep DOM sanitization, strips scripts/styles/ads, outputs clean Markdown",
+    "transport": "Server-Sent Events on /sse and /message endpoints",
+    "payment": "ethers.js — validates ERC-20 USDC transfers on Base Mainnet"
+  },
+
+  "payment": {
+    "protocol": "HTTP 402 + x402",
+    "currency": "USDC (ERC-20)",
+    "network": "Base Mainnet",
+    "validation": "ethers.js — verifies transaction hash on-chain before releasing content"
+  },
+
+  "environment_variables": {
+    "REQUIRE_PAYMENT": "boolean — enables the 402 interceptor",
+    "BASE_MICROPAYMENT_COST": "float — USDC cost per scrape (e.g. 0.01)",
+    "USDC_CONTRACT_ADDRESS": "ERC-20 USDC contract address on Base",
+    "MERCHANT_WALLET_ADDRESS": "Your EVM public key to receive payments",
+    "RPC_URL": "Web3 RPC provider (default: https://mainnet.base.org)"
+  },
+
+  "deployment": {
+    "platform": "Render",
+    "method": "render.yaml Blueprint — New → Blueprint → connect forked repo → auto-deploy",
+    "smithery": "smithery.yaml included for Smithery registry"
+  },
+
+  "client_sdk": {
+    "package": "aetheris-mcp-client",
+    "install": "npm install aetheris-mcp-client",
+    "description": "Official TypeScript SDK that auto-intercepts and settles 402 challenges",
+    "github": "https://github.com/timwal78/aetheris-client-sdk",
+    "note": "Agents should NOT connect manually — use the SDK"
+  },
+
+  "scraping_flow": [
+    "Agent connects to /sse endpoint via Aetheris MCP Client SDK",
+    "Agent requests a URL via MCP tool call",
+    "Server returns HTTP 402 if REQUIRE_PAYMENT=true",
+    "SDK intercepts challenge, signs USDC transfer on Base",
+    "Server validates transaction hash on-chain",
+    "JSDOM scrapes the target URL, sanitizes DOM, extracts Markdown",
+    "Clean Markdown context returned to agent"
+  ],
+
+  "target_users": [
+    "AI agents that need clean, ad-free web content for RAG or context",
+    "Developers deploying MCP servers with monetized scraping",
+    "Enterprises wanting one-click Render deployment with BYOK inference"
+  ]
+}
