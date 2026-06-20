@@ -1,48 +1,42 @@
 {
   "product": "Aetheris-MCP",
-  "tagline": "Enterprise x402 Agentic Web Scraper — SSE MCP Server",
+  "tagline": "Enterprise x402 Agentic Web Scraper \u2014 SSE MCP Server",
   "description": "Aetheris-MCP is an enterprise-grade Server-Sent Events (SSE) Model Context Protocol server providing AI agents with high-fidelity, ad-free Markdown web scraping protected by an on-chain x402 micropayment interceptor. Agents pay USDC on Base per scrape. Content is stripped of scripts, styles, and ads by JSDOM before delivery. Bring Your Own Key for inference. Render-ready with one-click deploy.",
   "url": "https://scriptmasterlabs.com",
   "github": "https://github.com/timwal78/aetheris-mcp-render",
   "license": "MIT",
   "organization": "ScriptMasterLabs / Script Master Labs LLC (SDVOSB)",
-
   "architecture": {
     "engine": "Node.js + Express",
-    "scraper": "JSDOM — deep DOM sanitization, strips scripts/styles/ads, outputs clean Markdown",
+    "scraper": "JSDOM \u2014 deep DOM sanitization, strips scripts/styles/ads, outputs clean Markdown",
     "transport": "Server-Sent Events on /sse and /message endpoints",
-    "payment": "ethers.js — validates ERC-20 USDC transfers on Base Mainnet"
+    "payment": "ethers.js \u2014 validates ERC-20 USDC transfers on Base Mainnet"
   },
-
   "payment": {
     "protocol": "HTTP 402 + x402",
     "currency": "USDC (ERC-20)",
     "network": "Base Mainnet",
-    "validation": "ethers.js — verifies transaction hash on-chain before releasing content"
+    "validation": "ethers.js \u2014 verifies transaction hash on-chain before releasing content"
   },
-
   "environment_variables": {
-    "REQUIRE_PAYMENT": "boolean — enables the 402 interceptor",
-    "BASE_MICROPAYMENT_COST": "float — USDC cost per scrape (e.g. 0.01)",
+    "REQUIRE_PAYMENT": "boolean \u2014 enables the 402 interceptor",
+    "BASE_MICROPAYMENT_COST": "float \u2014 USDC cost per scrape (e.g. 0.01)",
     "USDC_CONTRACT_ADDRESS": "ERC-20 USDC contract address on Base",
     "MERCHANT_WALLET_ADDRESS": "Your EVM public key to receive payments",
     "RPC_URL": "Web3 RPC provider (default: https://mainnet.base.org)"
   },
-
   "deployment": {
     "platform": "Render",
-    "method": "render.yaml Blueprint — New → Blueprint → connect forked repo → auto-deploy",
+    "method": "render.yaml Blueprint \u2014 New \u2192 Blueprint \u2192 connect forked repo \u2192 auto-deploy",
     "smithery": "smithery.yaml included for Smithery registry"
   },
-
   "client_sdk": {
     "package": "aetheris-mcp-client",
     "install": "npm install aetheris-mcp-client",
     "description": "Official TypeScript SDK that auto-intercepts and settles 402 challenges",
     "github": "https://github.com/timwal78/aetheris-client-sdk",
-    "note": "Agents should NOT connect manually — use the SDK"
+    "note": "Agents should NOT connect manually \u2014 use the SDK"
   },
-
   "scraping_flow": [
     "Agent connects to /sse endpoint via Aetheris MCP Client SDK",
     "Agent requests a URL via MCP tool call",
@@ -52,10 +46,110 @@
     "JSDOM scrapes the target URL, sanitizes DOM, extracts Markdown",
     "Clean Markdown context returned to agent"
   ],
-
   "target_users": [
     "AI agents that need clean, ad-free web content for RAG or context",
     "Developers deploying MCP servers with monetized scraping",
     "Enterprises wanting one-click Render deployment with BYOK inference"
-  ]
+  ],
+  "ecosystem": {
+    "organization": "ScriptMasterLabs",
+    "organization_url": "https://scriptmasterlabs.com",
+    "description": "ScriptMasterLabs builds x402 micropayment infrastructure, AI agent trust systems, and institutional market intelligence tools. All products interoperate via the x402 protocol for agent-native payments.",
+    "related_products": [
+      {
+        "name": "Aetheris Client SDK",
+        "role": "TypeScript x402 payment SDK for Aetheris-MCP",
+        "description": "Official npm SDK that auto-intercepts HTTP 402 challenges and settles USDC payments on Base \u2014 no manual payment handling needed.",
+        "github": "https://github.com/timwal78/aetheris-client-sdk",
+        "tags": [
+          "sdk",
+          "typescript",
+          "x402",
+          "usdc"
+        ]
+      },
+      {
+        "name": "mcp-x402 Signal API",
+        "role": "Unified pay-per-call MCP gateway",
+        "description": "43+ MCP tools covering trading signals, web scraping, SEC data, XRPL whale copy-trading, memecoin launchpad, and agent infrastructure. Multi-chain x402: Base USDC, XRPL RLUSD, Solana USDC.",
+        "github": "https://github.com/timwal78/sml-x402-signal-api",
+        "tags": [
+          "mcp-server",
+          "x402",
+          "multi-chain",
+          "trading"
+        ]
+      },
+      {
+        "name": "Ghost Layer",
+        "role": "Dual-chain XRPL+Base toll gateway",
+        "description": "Private routing engine with XRPL+Base micropayment toll, Xahau hooks intelligence, and URIToken minting. Go service, zero logging.",
+        "github": "https://github.com/timwal78/ghost-layer",
+        "url": "https://ghost-layer.onrender.com",
+        "tags": [
+          "gateway",
+          "xrpl",
+          "base",
+          "privacy"
+        ]
+      },
+      {
+        "name": "SqueezeOS",
+        "role": "Institutional AI trading intelligence MCP server",
+        "description": "33 MCP tools \u2014 short-squeeze detection, options flow, IWM 0DTE scoring, council verdicts, peer signal marketplace. Pay-per-signal in RLUSD on XRP Ledger via x402.",
+        "github": "https://github.com/timwal78/squeezeos",
+        "url": "https://squeezeos-api.onrender.com",
+        "tags": [
+          "mcp-server",
+          "trading",
+          "x402",
+          "rlusd"
+        ]
+      },
+      {
+        "name": "CrawlToll",
+        "role": "x402-gated web crawling service",
+        "description": "Metered web crawling with x402 micropayment gating. Agents pay per crawl in USDC or RLUSD.",
+        "github": "https://github.com/timwal78/crawltoll",
+        "tags": [
+          "crawling",
+          "x402"
+        ]
+      },
+      {
+        "name": "Printing Press Library",
+        "role": "Published catalog of generated Go CLIs and MCP servers",
+        "description": "Registry of type-safe Go CLIs and MCP servers produced by CLI Printing Press. Install any CLI via npx @mvanhorn/printing-press.",
+        "github": "https://github.com/timwal78/printing-press-library",
+        "tags": [
+          "cli",
+          "mcp-server",
+          "go",
+          "catalog"
+        ]
+      },
+      {
+        "name": "AGO Orchestrator",
+        "role": "Agent orchestration infrastructure",
+        "description": "Orchestration layer for ScriptMasterLabs autonomous agent workflows.",
+        "github": "https://github.com/timwal78/ago-orchestrator",
+        "tags": [
+          "orchestration",
+          "agents"
+        ]
+      },
+      {
+        "name": "ZeroQuery Protocol",
+        "role": "Privacy-preserving intent ranking with ZK proofs",
+        "description": "SDK + Anchor program for ranking user intents without leaking raw queries. Groth16 ZK proofs (Poseidon hash) + pay-as-you-go SOL SaaS tiers.",
+        "github": "https://github.com/timwal78/zeroquery-protocol",
+        "tags": [
+          "zk-proofs",
+          "solana",
+          "privacy",
+          "sdk"
+        ]
+      }
+    ]
+  }
 }
