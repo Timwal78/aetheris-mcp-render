@@ -1,0 +1,42 @@
+name: publish-aetheris-mcp-to-mcp-registry
+
+# Publishes Aetheris-MCP to the official MCP Registry (registry.modelcontextprotocol.io).
+# Aetheris-MCP is a REMOTE SSE server — no npm package, no secrets needed.
+# GitHub OIDC proves ownership of the io.github.timwal78 namespace.
+# Aggregators (mcp.so, Glama, PulseMCP) sync from the registry automatically.
+#
+# How to run: Actions tab → publish-aetheris-mcp-to-mcp-registry → Run workflow
+
+on:
+  workflow_dispatch: {}
+  push:
+    tags: ["aetheris-mcp-v*"]
+
+jobs:
+  publish:
+    name: Publish to MCP Registry
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # required for GitHub OIDC auth to the registry
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Install mcp-publisher
+        run: |
+          curl -L "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_$(uname -s | tr '[:upper:]' '[:lower:]')_$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/').tar.gz" | tar xz mcp-publisher
+          ./mcp-publisher --help | head -1
+
+      - name: Authenticate (GitHub OIDC — no token needed)
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server.json
+        run: ./mcp-publisher publish
+
+      - name: Verify listing
+        run: |
+          echo "Published. Verifying in registry..."
+          sleep 5
+          curl -s "https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.timwal78/aetheris-mcp" | head -c 800 || true
+          echo ""

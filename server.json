@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.timwal78/aetheris-mcp",
+  "title": "Aetheris-MCP — x402 Web Scraping MCP Server",
+  "description": "SSE MCP server for monetized web scraping and context extraction using x402 micropayments. Agents pay 0.01 USDC per page on Base (EVM) via the x402 payment protocol. Content is returned as clean, ad-free Markdown after JSDOM sanitization. No API key required — payment is on-chain.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/timwal78/aetheris-mcp-render",
+    "source": "github"
+  },
+  "homepage": "https://github.com/timwal78/aetheris-mcp-render",
+  "license": "MIT",
+  "remotes": [
+    {
+      "type": "sse",
+      "url": "https://aetheris-mcp.onrender.com/sse"
+    }
+  ],
+  "keywords": ["web-scraping", "x402", "micropayments", "usdc", "base", "mcp", "context-extraction"]
+}
