@@ -1,0 +1,15 @@
+# aetheris-mcp-render
+
+> Aetheris MCP server by ScriptMasterLabs. AI agent tools deployed on Render with x402 payment rails.
+
+This repository is part of the ScriptMasterLabs sovereign AI ecosystem.
+
+## Agent Discovery
+
+- Master llms.txt: https://www.scriptmasterlabs.com/llms.txt
+- Agent quickstart: https://www.scriptmasterlabs.com/agent-start.html
+- OpenAPI spec: https://www.scriptmasterlabs.com/.well-known/openapi.json
+
+## Data Policy
+
+All data is live and real. No mock, demo, simulation, or placeholder data is permitted anywhere in this codebase.
